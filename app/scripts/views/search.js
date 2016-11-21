@@ -15,7 +15,7 @@ define([
     el: $('.search'),  
 
     events: {
-      'click .btn_search' : 'search'
+      'keydown .search_box' : 'search'
     },
 
     initialize: function () {
@@ -27,9 +27,21 @@ define([
     },
 
     search: function(e) {
-      e.preventDefault();
-      new CardView().render(); 
-      localStorage["searchkeys"]="abc"; 
+      
+      var code = e.keyCode || e.which
+      if(code == 13) {
+        e.preventDefault();
+        new CardView().render(); 
+        var currentKey = $(this.el).find("#search_box").val();
+        var searchKeys = localStorage.getItem('searchkeys'); 
+        if(!searchKeys) {
+          searchKeys = "[]";
+        }
+        searchKeys = JSON.parse(searchKeys);
+        searchKeys.push(currentKey);
+        localStorage.setItem('searchkeys', JSON.stringify(searchKeys));
+      }
+      
     }
 
   }); 
