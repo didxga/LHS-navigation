@@ -5,8 +5,9 @@ define([
   'underscore',
   'backbone',
   'templates',
-  'views/card'
-], function ($, _, Backbone, JST, CardView) {
+  'views/card',
+  'models/card'
+], function ($, _, Backbone, JST, CardView, CardModel) {
   'use strict';
 
   var SearchView = Backbone.View.extend({
@@ -31,7 +32,7 @@ define([
       var code = e.keyCode || e.which
       if(code == 13) {
         e.preventDefault();
-        new CardView().render(); 
+        new CardView({'model': new CardModel({'title': code})}).render(); 
         var currentKey = $(this.el).find("#search_box").val();
         var searchKeys = localStorage.getItem('searchkeys'); 
         if(!searchKeys) {

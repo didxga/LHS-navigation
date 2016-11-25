@@ -22,8 +22,20 @@ requirejs.onError = function (err) {
  
 require([
   'backbone',
-  'views/search'
-], function (Backbone, SearchView) {
+  'views/search',
+  'views/card',
+  'models/card',
+  'localstorage/searKeyword'
+], function (Backbone, SearchView, CardView, CardModel, SearKeyword) {
   Backbone.history.start();
-  new SearchView().render();  
+  new SearchView().render(); 
+  var searchKeys = localStorage["searchkeys"];
+  if(searchKeys && searchKeys.length > 0) {
+    var searchKeyArray = JSON.parse(searchKeys);
+    var l=searchKeyArray.length; 
+    for(let i=0; i<l; i++) {
+      let cardmodel = new CardModel({"title": searchKeyArray[i]});
+      new CardView({"model": cardmodel}).render();
+    }
+  } 
 });

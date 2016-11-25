@@ -13,6 +13,7 @@ define([
     },
 
     defaults: {
+      title: ''
     },
 
     validate: function(attrs, options) {

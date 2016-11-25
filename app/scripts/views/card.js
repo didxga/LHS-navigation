@@ -19,12 +19,13 @@ define([
       'click .btn_close': 'closeCard' 
     },
 
-    initialize: function () {
+    initialize: function (options) {
+      this.options = options;
       //this.listenTo(this.model, 'change', this.render);
     },
 
     render: function () {
-      this.$el.html(this.template());
+      this.$el.html(this.template(this.model));
       $('.cards').append(this.$el);
     },
 
