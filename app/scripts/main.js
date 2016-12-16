@@ -24,11 +24,14 @@ require([
   'backbone',
   'views/search',
   'views/card',
+  'views/nav',
   'models/card',
-  'localstorage/searKeyword'
-], function (Backbone, SearchView, CardView, CardModel, SearKeyword) {
+  'models/nav',
+  'localstorage/searchKeyword'
+], function (Backbone, SearchView, CardView, NavView, CardModel, NavModel, SearKeyword) {
   Backbone.history.start();
   new SearchView().render(); 
+  new NavView({"model": new NavModel()}).render();
   var searchKeys = localStorage["searchkeys"];
   if(searchKeys && searchKeys.length > 0) {
     var searchKeyArray = JSON.parse(searchKeys);
