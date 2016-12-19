@@ -13,7 +13,7 @@ define([
 
     tagName: 'section',
 
-    className: 'nav',
+    className: 'navs',
 
     events: {
       //'click .btn_close': 'closeCard' 
@@ -26,7 +26,7 @@ define([
 
     render: function () {
       this.$el.html(this.template(this.model));
-      $('.nav').append(this.$el);
+      $('.navbox').append(this.$el);
     },
 
   });
